@@ -1,0 +1,175 @@
+.popup {
+    height: 100vh;
+    width: 100%;   
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba($color-black, .8);
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: transform .3s;
+
+    @supports(-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px)) {
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        background-color: rgba($color-black, .3);
+    };
+    
+    &__content {
+        @include absCenter;
+        
+        width: 75%;
+        background-color: $color-white;
+        box-shadow: 0 2rem 4rem rgba($color-black, .2);
+        border-radius: 3px;
+        display: table;
+        overflow: hidden;
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(.25);
+        transition: all .5s .2s;
+
+        @include respond(laptop-lg) {
+            width: 75%;
+            position: relative;
+        }
+    }
+    
+    &__left {
+        width: 33.3333333%;
+        display: table-cell;
+
+        @include respond(tab-land) {
+            background-image: url(../img/nat-8.jpg);
+            background-size: cover;
+            background-position: center;
+            width: 40%;
+        }
+
+        @include respond(tab-port) {
+            width: 39%;
+        }
+        
+        @include respond(phone) {
+            width: 30%;
+        }
+    }
+    
+    &__right {
+        width: 66.6666667%;
+        display: table-cell;
+        vertical-align: middle;
+        padding: 3rem 5rem;
+        
+        @include respond(laptop-lg) {
+            width: 50%; 
+        }
+
+        @include respond(tab-land) {
+            width: 60%;
+            padding: 2rem 3rem;
+            
+            & h2 {
+                font-size: 2.4rem;
+            }
+        }
+
+        @include respond(tab-port) {
+            padding: 1.5rem 2.5rem;
+            width: 61%;
+
+            & h2 {
+                font-size: 2rem;
+                letter-spacing: .1rem;
+            }
+            & h3 {
+                font-size: 1rem;
+            }
+        }
+
+        @include respond(phone) {
+            width: 70%;
+            & h2 {
+                font-size: 1.8rem;
+            }
+        }
+    }
+    
+    &__img {
+        display: list-item;
+        width: 100%;
+
+        @include respond(tab-land) {
+            display: none;
+        }
+    }
+
+    &__text {
+        font-size: 1.4rem;
+        margin-bottom: 4rem;
+        
+        column-count: 2;
+        column-gap: 4rem; 
+        column-rule: 1px solid $color-grey-light-2;
+        
+        hyphens: auto;
+
+        @include respond(tab-land) {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+
+        }
+        @include respond(tab-port) {
+            margin-bottom: 2rem;
+        }
+        @include respond(phone) {
+            column-count: 1;
+        }
+    }
+    
+    //Open states
+    &:target {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    &:target &__content {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    &__close {
+        &:link,
+        &:visited {
+            color: $color-grey-dark;
+            position: absolute;
+            top: 2.5rem;
+            right: 2.5rem;
+            font-size: 3rem;
+            text-decoration: none;
+            display: inline-block;
+            transition: all .2s;
+            line-height: 1;
+
+            @include respond(phone) {
+                top: .4rem;
+                right: .4rem;
+            }
+
+
+            @include respond(tab-port) {
+                top: .6rem;
+                right: .6rem;
+            }
+
+            @include respond(tab-land) {
+                top: 1.5rem;
+                right: 1.5rem;
+            }
+        }
+
+        &:hover {
+            color: $color-primary;
+        }
+    }
+}
